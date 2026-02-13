@@ -4,7 +4,8 @@ CXXFLAGS = -O2 -std=c++17 -Iinclude
 SRC_CPP = src/cpp/iterative_dp.cpp \
           src/cpp/memoized_dp.cpp \
           src/cpp/optimized_dp.cpp \
-          benchmarks/benchmark.cpp
+          benchmarks/benchmark.cpp  \
+		  src/cpp/utils.cpp
 
 TARGET = dp_benchmark
 
