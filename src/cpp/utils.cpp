@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "../../include/utils.h"
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -14,7 +14,7 @@ ProblemInstance load_instance(const std::string &filename) {
   if (file.fail()) {
     throw std::runtime_error("Error: Invalid header format in file" + filename);
   }
-  instance.trades.reverse(instance.N);
+  instance.trades.reserve(instance.N);
 
   for (int i = 0; i < instance.N; i++) {
     Trade t;
@@ -26,4 +26,20 @@ ProblemInstance load_instance(const std::string &filename) {
   }
   file.close();
   return instance;
+}
+
+
+void print_instance(const ProblemInstance& instance){
+  std::cout<< "Number of trades : " << instance.N <<"\n";
+  std::cout<< "Risk Limit : " << instance.R_max <<"\n";
+  std::cout<< "Capital Limit : " << instance.C_max <<"\n";
+
+  for(int i = 0; i < instance.N; ++i){
+    const Trade& t = instance.trades[i];
+    std::cout<< "Trade" << i
+             << " | Profit: " << t.profit
+             << " | Risk: " << t.risk
+             << " | Capital: " << t.capital
+             << "\n";
+  }
 }

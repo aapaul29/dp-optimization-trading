@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/aarya/OneDrive/Desktop/dp-optimization-trading/src/cpp",
-      "program": "c:/Users/aarya/OneDrive/Desktop/dp-optimization-trading/src/cpp/build/Debug/outDebug",
+      "cwd": "c:/Users/aarya/OneDrive/Desktop/dp-optimization-trading",
+      "program": "c:/Users/aarya/OneDrive/Desktop/dp-optimization-trading/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
