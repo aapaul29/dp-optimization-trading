@@ -1,22 +1,26 @@
 #ifndef PROBLEM_DEFINITION_H
 #define PROBLEM_DEFINITION_H
 
-#include <string>
 #include <vector>
+#include <string>
 
-// define Trade as struct
-struct Trade {
-  int profit;
-  int risk;
-  int capital;
+// Structure for trade assets
+struct Asset {
+    int profit;   // p_i
+    int risk;     // r_i
+    int capital;  // c_i
 };
 
-// define Problem Instance as struct
+// Container for the knapsack problem instance
 struct ProblemInstance {
-  int N;                     // number of trades
-  int R_max;                 // maximum of total risk
-  int C_max;                 // maximum of total capital
-  std::vector<Trade> trades; // list of trades
+    int n;
+    int max_risk;    // R_max
+    int max_capital; // C_max
+    std::vector<Asset> assets;
 };
+
+// Utility functions for data handling
+ProblemInstance load_instance(const std::string& filename);
+void print_instance(const ProblemInstance& instance);
 
 #endif

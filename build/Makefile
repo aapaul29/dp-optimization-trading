@@ -1,21 +1,17 @@
 CXX = g++
 CXXFLAGS = -O2 -std=c++17 -Iinclude
-
-SRC_CPP = src/cpp/iterative_dp.cpp \
-          src/cpp/memoized_dp.cpp \
-          src/cpp/optimized_dp.cpp \
-          benchmarks/benchmark.cpp  \
-		  src/cpp/utils.cpp
-
-TARGET = dp_benchmark
+SRC = src/iterative_dp.cpp src/memoized_dp.cpp src/optimized_dp.cpp src/utils.cpp benchmarks/benchmark.cpp
+BUILD_DIR = build
+TARGET = $(BUILD_DIR)/dp_benchmark
 
 all: $(TARGET)
 
-$(TARGET): $(SRC_CPP)
-	$(CXX) $(CXXFLAGS) $(SRC_CPP) -o $(TARGET)
+$(TARGET): $(SRC)
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
 
 clean:
-	rm -f $(TARGET)
+	rm -rf $(BUILD_DIR)
 
 run: all
 	./$(TARGET)
