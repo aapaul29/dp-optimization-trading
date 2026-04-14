@@ -82,3 +82,27 @@ g++ -O2 -std=c++17 src/cpp/optimized_dp.cpp -o dp
 ./dp
 
 ---
+
+## Execution Guide
+1. Build the Project
+Use the provided Makefile to compile all source files into a single benchmark tool:
+# In PowerShell or Terminal
+make
+2. Run C++ Benchmarks
+Execute the compiled binary from the project root.
+
+On Windows (PowerShell):
+.\build\dp_benchmark.exe
+On Linux / macOS:
+./build/dp_benchmark
+
+3. Run Python Reference
+To verify the C++ results against a standard Python implementation:
+python reference/dp_reference.py
+
+## Summary of Commands
+Action,Command
+Clean Build Files,make clean
+Compile Project,make
+Run C++ Solver,.\build\dp_benchmark.exe
+Run Python Ref,python reference/dp_reference.py
