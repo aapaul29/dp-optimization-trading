@@ -14,7 +14,7 @@ struct Trade {
 // define Problem Instance as struct
 struct ProblemInstance {
   int N;                     // number of trades
-  int R_max;                 // maximum of total ris
+  int R_max;                 // maximum of total risk
   int C_max;                 // maximum of total capital
   std::vector<Trade> trades; // list of trades
 };
