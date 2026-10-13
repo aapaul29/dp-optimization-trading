@@ -23,7 +23,6 @@ Capital- and risk-constrained portfolio allocation via optimized C++ dynamic pro
 ├── data/              # Input datasets (small / large instances)
 ├── docs/              # Analysis and optimization notes
 ├── build/             # Compiled binaries (generated)
-├── Makefile
 └── README.md
 ```
 
@@ -64,17 +63,27 @@ Recursive formulation used for overhead comparison against the iterative approac
 
 ## Execution Guide
 
+**Prerequisites:** a C++17 compiler (`g++`) and Python 3. On Windows, `g++` from [MSYS2](https://www.msys2.org/) (UCRT64) works.
+
+Run all commands from the project root. The benchmark loads `data/small_instance.txt` by a relative path, so it fails to find the file if run from another directory.
+
 ### 1. Build the Project
 
-Compile all C++ sources using the Makefile:
+Compile all C++ sources with `g++`:
 
 ```bash
-make
+# Linux / macOS
+g++ -std=c++17 -O2 -Iinclude src/*.cpp benchmarks/benchmark.cpp -o build/dp_benchmark
+
+# Windows
+g++ -std=c++17 -O2 -static -Iinclude src/*.cpp benchmarks/benchmark.cpp -o build/dp_benchmark.exe
 ```
+
+> **Windows note:** keep the `-static` flag. Without it, the program can crash at startup with a segmentation fault if another `libstdc++` DLL on your `PATH` gets loaded instead of the one that matches your compiler.
 
 ### 2. Run C++ Benchmarks
 
-Execute the compiled binary from the project root:
+Execute the compiled binary:
 
 ```bash
 # Linux / macOS
@@ -84,13 +93,28 @@ Execute the compiled binary from the project root:
 .\build\dp_benchmark.exe
 ```
 
+Expected output (timings vary):
+
+```
+Trades: 5 | Risk Cap: 10 | Capital Cap: 10
+Iterative: 13 (Time: 0.0257 ms)
+Memoized : 13 (Time: 0.0174 ms)
+Optimized: 13 (Time: 0.0026 ms)
+```
+
 ### 3. Run Python Reference
 
 Verify results against the Python implementation:
 
 ```bash
+# Linux / macOS
 python3 reference/dp_reference.py
+
+# Windows
+python reference/dp_reference.py
 ```
+
+It should print `Python Result: 13`, matching the C++ solvers.
 
 ---
 
@@ -98,10 +122,10 @@ python3 reference/dp_reference.py
 
 | Action | Command |
 |---|---|
-| Clean old files | `make clean` |
-| Build project | `make` |
-| Execute C++ | `./build/dp_benchmark` |
-| Execute Python | `python3 reference/dp_reference.py` |
+| Build (Linux / macOS) | `g++ -std=c++17 -O2 -Iinclude src/*.cpp benchmarks/benchmark.cpp -o build/dp_benchmark` |
+| Build (Windows) | `g++ -std=c++17 -O2 -static -Iinclude src/*.cpp benchmarks/benchmark.cpp -o build/dp_benchmark.exe` |
+| Execute C++ | `./build/dp_benchmark` (Windows: `.\build\dp_benchmark.exe`) |
+| Execute Python | `python3 reference/dp_reference.py` (Windows: `python`) |
 
 ---
 
